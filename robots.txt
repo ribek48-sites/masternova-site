@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# ИИ-поисковики: разрешены явно, чтобы мастерская попадала в ответы ассистентов
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: YandexAdditional
+Allow: /
+
+Sitemap: https://masternova.ru/sitemap.xml
