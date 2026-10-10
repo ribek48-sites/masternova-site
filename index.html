@@ -6,12 +6,32 @@
 <title>Ремонт телефонов в Липецке, ТЦ «Меркурий» | Мастер Нова</title>
 <meta name="description" content="Мастерская «Мастер Нова» в цоколе ТЦ «Меркурий» у площади Победы. Ремонт телефонов, ноутбуков, зарядок и кнопочных телефонов в Липецке. 8 961 600-44-40.">
 <link rel="canonical" href="https://masternova.ru/">
-<meta name="theme-color" content="#0f1216">
+<meta name="theme-color" content="#e9eef5">
+<script>
+// Тема до первой отрисовки: выбор пользователя из localStorage, иначе настройка устройства
+(function () {
+  var d = document.documentElement, mq = window.matchMedia('(prefers-color-scheme: dark)'), saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  window.applyTheme = function (t) {
+    d.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'dark' ? '#080b11' : '#e9eef5');
+    var b = document.querySelector('[data-theme-toggle]');
+    if (b) b.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+  };
+  applyTheme(saved === 'dark' || saved === 'light' ? saved : (mq.matches ? 'dark' : 'light'));
+  // Пока посетитель сам не выбрал тему, следуем за устройством
+  if (mq.addEventListener) mq.addEventListener('change', function (e) {
+    var s = null; try { s = localStorage.getItem('theme'); } catch (x) {}
+    if (!s) applyTheme(e.matches ? 'dark' : 'light');
+  });
+})();
+</script>
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/geologica-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/styles.css">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
@@ -138,27 +158,25 @@
 }
 </script>
 </head>
-<body class="bg-ink text-text font-sans antialiased">
-<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-sun focus:text-ink focus:px-4 focus:py-2 focus:rounded-box">К содержанию</a>
+<body class="font-sans antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-accent focus:text-white focus:px-4 focus:py-2 focus:rounded-box">К содержанию</a>
 
-<header class="sticky top-0 z-40 border-b border-line bg-ink/95 backdrop-blur">
-  <div class="wrap flex h-16 md:h-[72px] items-center justify-between gap-4">
-    <a href="/" class="logo" aria-label="Мастер Нова, на главную">
-      <span aria-hidden="true" class="text-blue">МАСТЕР</span>
-      <span aria-hidden="true" class="inline-flex items-end">НОВ<svg class="logo-eye" viewBox="0 0 40 36" focusable="false"><path d="M20 2 38 34H2Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/><path d="M11 24c3-4.2 6-6 9-6s6 1.8 9 6c-3 4.2-6 6-9 6s-6-1.8-9-6Z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="20" cy="24" r="2.6" fill="#e04a3a"/></svg></span>
-    </a>
-    <nav aria-label="Основное меню" class="hidden lg:block">
-      <ul class="flex items-center gap-7 text-[17px]">
-        <li><a class="nav-link" href="/zamena-ekrana/">Экран</a></li>
-        <li><a class="nav-link" href="/zamena-akkumulyatora/">Аккумулятор</a></li>
-        <li><a class="nav-link" href="/ne-zaryazhaetsya/">Не заряжается</a></li>
-        <li><a class="nav-link" href="/zabyli-parol/">Забыли пароль</a></li>
-        <li><a class="nav-link" href="/sovety/">Советы</a></li>
-        <li><a class="nav-link" href="/#kak-nayti">Как найти</a></li>
-      </ul>
-    </nav>
-    <div class="flex items-center gap-2">
-      <a href="tel:+79616004440" class="hidden md:inline-flex btn btn-call btn-sm"><svg class="size-5 shrink-0" aria-hidden="true" focusable="false"
+<header class="sticky top-0 z-40 pt-2 md:pt-4">
+  <div class="wrap">
+    <div class="glass-blur rounded-[20px] flex h-14 md:h-15 items-center justify-between gap-4 pl-4 pr-1.5 md:pl-6 md:pr-2.5">
+      <a href="/" class="logo">Мастер Нова</a>
+      <nav aria-label="Основное меню" class="hidden lg:block grow pl-4">
+        <ul class="flex items-center gap-6 text-[15px]">
+          <li><a class="nav-link" href="/zamena-ekrana/">Экран</a></li>
+          <li><a class="nav-link" href="/zamena-akkumulyatora/">Аккумулятор</a></li>
+          <li><a class="nav-link" href="/ne-zaryazhaetsya/">Не заряжается</a></li>
+          <li><a class="nav-link" href="/zabyli-parol/">Забыли пароль</a></li>
+          <li><a class="nav-link" href="/sovety/">Советы</a></li>
+          <li><a class="nav-link" href="/#kak-nayti">Как найти</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center gap-1 md:gap-2">
+        <button type="button" class="icon-btn theme-btn" data-theme-toggle aria-label="Тёмная тема" aria-pressed="false"><svg class="i-moon size-5 shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -171,10 +189,26 @@
  
 >
   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-</svg><span>8 961 600-44-40</span></a>
-      <details class="menu lg:hidden">
-        <summary aria-label="Меню" class="menu-btn"><svg class="size-7 shrink-0" aria-hidden="true" focusable="false"
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008" />
+</svg><svg class="i-sun size-5 shrink-0" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+ 
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+  <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+</svg></button>
+        <a href="tel:+79616004440" class="hidden md:inline-flex btn btn-call btn-sm font-mono tabular-nums">8 961 600-44-40</a>
+        <details class="menu lg:hidden">
+          <summary aria-label="Меню" class="menu-btn icon-btn"><svg class="size-6 shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -191,23 +225,37 @@
   <path d="M4 12l16 0" />
   <path d="M4 18l16 0" />
 </svg></summary>
-        <nav aria-label="Меню" class="menu-panel">
-          <a href="/zamena-ekrana/">Замена экрана</a>
-          <a href="/zamena-akkumulyatora/">Аккумулятор</a>
-          <a href="/ne-zaryazhaetsya/">Не заряжается</a>
-          <a href="/zabyli-parol/">Забыли пароль</a>
-          <a href="/sovety/">Советы</a>
-          <a href="/#kak-nayti">Как найти</a>
-        </nav>
-      </details>
+          <nav aria-label="Меню" class="menu-panel">
+            <a href="/zamena-ekrana/">Замена экрана</a>
+            <a href="/zamena-akkumulyatora/">Аккумулятор</a>
+            <a href="/ne-zaryazhaetsya/">Не заряжается</a>
+            <a href="/zabyli-parol/">Забыли пароль</a>
+            <a href="/sovety/">Советы</a>
+            <a href="/#kak-nayti">Как найти</a>
+          </nav>
+        </details>
+      </div>
     </div>
   </div>
 </header>
 
 <main id="main">
-<section class="wrap pt-10 pb-10 md:pt-16 md:pb-12 grid gap-10 md:grid-cols-[1.25fr_1fr] md:items-center">
-  <div>
-    <p class="inline-flex items-center gap-2 text-muted font-semibold"><svg class="size-5 text-sun shrink-0" aria-hidden="true" focusable="false"
+<script>
+// 3D-сборка телефона: решаем до отрисовки первого экрана, чтобы не прыгала высота (src/js/phone3d.js, этап 8.3).
+// Постер — элемент LCP: просим его сразу, не дожидаясь разбора CSS
+(function () {
+  var d = document.documentElement, on = !!window.WebGLRenderingContext && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (on) d.classList.add('p3d');
+  var l = document.createElement('link');
+  l.rel = 'preload'; l.as = 'image'; l.fetchPriority = 'high';
+  l.href = '/img/phone-' + (on ? 'start' : 'end') + '-' + (d.getAttribute('data-theme') === 'dark' ? 'dark' : 'light') + '.webp';
+  document.head.appendChild(l);
+})();
+</script>
+<section class="hero">
+  <div class="hero-stage wrap pt-8 pb-6 md:pt-14 md:pb-10 grid gap-x-10 md:grid-cols-[1.1fr_1fr]">
+    <div class="md:col-start-1 md:row-start-1 md:self-end max-md:text-center">
+      <p class="inline-flex items-center gap-2 text-muted"><svg class="size-5 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -223,9 +271,12 @@
   <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
   <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0" />
 </svg>ТЦ «Меркурий», цокольный этаж</p>
-    <h1 class="h1 mt-4">Ремонт телефонов, ноутбуков и зарядок в Липецке</h1>
-    <p class="mt-5 text-lg md:text-xl text-muted max-w-[44ch]">Чиним то, от чего отказываются другие: кнопочные телефоны, любые зарядки, аккумуляторы для старых моделей.</p>
-    <div class="mt-8 grid gap-3 sm:flex sm:flex-wrap"><a href="tel:+79616004440" class="btn btn-call "><svg class="size-6 shrink-0" aria-hidden="true" focusable="false"
+      <h1 class="h1 mt-4 md:mt-5">Ремонт телефонов, ноутбуков и зарядок в Липецке</h1>
+      <p class="mt-5 text-lg md:text-xl font-light text-muted max-w-[34ch] max-md:mx-auto">Чиним то, от чего отказываются другие: кнопочные телефоны, любые зарядки, аккумуляторы для старых моделей.</p>
+    </div>
+    <!-- Разбитый телефон собирается в целый по прокрутке; до загрузки сцены и без WebGL — постер -->
+    <div class="hero-visual rise rise-2 md:col-start-2 md:row-start-1 md:row-span-2" aria-hidden="true"><div class="hero-poster"></div></div>
+    <div class="hero-cta grid gap-3 sm:flex sm:flex-wrap sm:max-md:justify-center md:col-start-1 md:row-start-2 md:self-start md:mt-8"><a href="tel:+79616004440" class="btn btn-call "><svg class="size-6 shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -256,15 +307,146 @@
   <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
 </svg><span>Написать в WhatsApp</span></a></div>
   </div>
-  <!-- Место под фото отдела или входа, когда брат разрешит и пришлёт; пока бейдж в стиле штендера -->
-  <div class="rise rise-2 rounded-box bg-blue-deep px-6 py-8 md:p-10 text-center">
-    <p class="text-2xl md:text-3xl font-extrabold tracking-wide">РЕМОНТ</p>
-    <p class="mt-1 text-sky-100 text-base md:text-lg">телефонов, ноутбуков, планшетов и другой техники</p>
-    <div class="mx-auto mt-6 w-full max-w-[19rem] rounded-[50%] bg-sun px-6 py-5 text-ink shadow-[0_10px_30px_rgb(0_0_0/.35)]">
-      <p class="flex items-baseline justify-center gap-2 font-extrabold leading-none">
-        <span class="text-2xl">за</span><span class="text-7xl text-[#c8321f] tabular-nums">88</span><span class="text-2xl">мин.</span>
-      </p>
-      <p class="mt-2 text-sm font-semibold">при наличии запчастей</p>
+</section>
+<script type="module">
+// Three.js тяжёлый: через 3 с после load бандл только скачивается в кеш (раньше он отнимал канал у шрифтов
+// и заголовка), а запускается по первому действию посетителя. До этого виден постер с теми же обломками.
+// ?phone= (постеры, скриншоты) запускает сразу
+if (document.documentElement.classList.contains('p3d')) {
+  const evs = ['pointermove', 'pointerdown', 'touchstart', 'wheel', 'scroll', 'keydown'];
+  let started = false;
+  const go = () => {
+    if (started) return;
+    started = true;
+    evs.forEach((e) => removeEventListener(e, go));
+    import('/assets/phone3d.js').then((m) => m.init(document.querySelector('.hero-visual')))
+      .catch(() => document.documentElement.classList.remove('p3d'));
+  };
+  evs.forEach((e) => addEventListener(e, go, { passive: true }));
+  if (location.search.includes('phone=')) go();
+  addEventListener('load', () => setTimeout(() => {
+    const l = document.createElement('link');
+    l.rel = 'prefetch'; l.href = '/assets/phone3d.js';
+    document.head.appendChild(l);
+  }, 3000), { once: true });
+}
+</script>
+
+<section class="wrap py-8 md:py-12" aria-labelledby="repair-title">
+  <h2 id="repair-title" class="h2">Что чиним</h2>
+  <ul class="mt-6 md:mt-8 grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+    <li><a href="/zamena-ekrana/" class="service-card glass p-4 md:p-6"><svg class="size-7 md:size-8 text-accent-text shrink-0" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+ 
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M7.159 3.185c.256 -.119 .54 -.185 .841 -.185h8a2 2 0 0 1 2 2v9m0 4v1a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-13" />
+  <path d="M11 4h2" />
+  <path d="M3 3l18 18" />
+  <path d="M12 17v.01" />
+</svg><span><span class="block text-base md:text-xl font-semibold tracking-tight">Замена экрана и стекла</span><span class="block mt-1 text-sm md:text-base text-muted">Разбили, полосы, не реагирует на касания</span></span></a></li>
+    <li><a href="/zamena-akkumulyatora/" class="service-card glass p-4 md:p-6"><svg class="size-7 md:size-8 text-accent-text shrink-0" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+ 
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M6 7h11a2 2 0 0 1 2 2v.5a.5 .5 0 0 0 .5 .5a.5 .5 0 0 1 .5 .5v3a.5 .5 0 0 1 -.5 .5a.5 .5 0 0 0 -.5 .5v.5a2 2 0 0 1 -2 2h-11a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2" />
+  <path d="M7 10l0 4" />
+  <path d="M10 10l0 4" />
+</svg><span><span class="block text-base md:text-xl font-semibold tracking-tight">Замена аккумулятора</span><span class="block mt-1 text-sm md:text-base text-muted">Быстро садится, выключается, вздулся</span></span></a></li>
+    <li><a href="/ne-zaryazhaetsya/" class="service-card glass p-4 md:p-6"><svg class="size-7 md:size-8 text-accent-text shrink-0" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+ 
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M9.785 6l8.215 8.215l-2.054 2.054a5.81 5.81 0 1 1 -8.215 -8.215l2.054 -2.054" />
+  <path d="M4 20l3.5 -3.5" />
+  <path d="M15 4l-3.5 3.5" />
+  <path d="M20 9l-3.5 3.5" />
+</svg><span><span class="block text-base md:text-xl font-semibold tracking-tight">Не заряжается</span><span class="block mt-1 text-sm md:text-base text-muted">Разъём, кабель, блок питания</span></span></a></li>
+    <li><a href="/zabyli-parol/" class="service-card glass p-4 md:p-6"><svg class="size-7 md:size-8 text-accent-text shrink-0" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+ 
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2l0 -6" />
+  <path d="M11 16a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+  <path d="M8 11v-5a4 4 0 0 1 8 0" />
+</svg><span><span class="block text-base md:text-xl font-semibold tracking-tight">Забыли пароль</span><span class="block mt-1 text-sm md:text-base text-muted">Восстановим доступ владельцу</span></span></a></li>
+    <li><a href="tel:+79616004440" class="service-card glass p-4 md:p-6"><svg class="size-7 md:size-8 text-accent-text shrink-0" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+ 
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M3 19l18 0" />
+  <path d="M5 7a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" />
+</svg><span><span class="block text-base md:text-xl font-semibold tracking-tight">Ноутбуки и планшеты</span><span class="block mt-1 text-sm md:text-base text-muted">Позвоните, расскажите, что случилось</span></span></a></li>
+    <li><a href="tel:+79616004440" class="service-card glass p-4 md:p-6"><svg class="size-7 md:size-8 text-accent-text shrink-0" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+ 
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5" />
+</svg><span><span class="block text-base md:text-xl font-semibold tracking-tight">Другая техника</span><span class="block mt-1 text-sm md:text-base text-muted">Спросите по телефону, возьмёмся ли</span></span></a></li>
+  </ul>
+</section>
+
+<section class="wrap py-6 md:py-10" aria-labelledby="why-title">
+  <div class="glass rounded-[28px] p-6 md:p-12 grid gap-8 lg:grid-cols-[1.2fr_repeat(3,minmax(0,1fr))] lg:items-end">
+    <h2 id="why-title" class="h2">Почему несут к нам</h2>
+    <!-- 4,8 и 34 отзыва — карточка 2ГИС на 07.10.2026 (research/competitors.md); при заметном изменении обновить -->
+    <div class="grid grid-cols-3 gap-4 lg:contents max-md:text-center">
+      <div><p class="stat text-3xl md:text-5xl">88<span class="text-sm md:text-xl"> мин</span></p><p class="mt-2 text-sm md:text-base text-muted">обычный ремонт, если запчасть есть</p></div>
+      <div><p class="stat text-3xl md:text-5xl">4,8</p><p class="mt-2 text-sm md:text-base text-muted">в 2ГИС по 34 отзывам</p></div>
+      <div><p class="stat text-3xl md:text-5xl">20+<span class="text-sm md:text-xl"> лет</span></p><p class="mt-2 text-sm md:text-base text-muted">в цоколе «Меркурия», с начала 2000-х</p></div>
     </div>
   </div>
 </section>
@@ -272,8 +454,8 @@
 <section class="wrap py-12 md:py-16" aria-labelledby="niche-title">
   <h2 id="niche-title" class="h2 max-w-[24ch]">Берёмся за то, от чего отказываются другие</h2>
   <div class="mt-10 grid gap-4 md:grid-cols-2 md:grid-rows-2">
-    <a href="/zamena-akkumulyatora/" class="group md:row-span-2 rounded-box bg-blue-deep p-7 md:p-10 flex flex-col justify-between gap-10 hover:bg-[#22559c]">
-      <svg class="size-16 text-sun shrink-0" aria-hidden="true" focusable="false"
+    <a href="/zamena-akkumulyatora/" class="group md:row-span-2 rounded-box glass p-7 md:p-10 flex flex-col justify-between gap-10 hover:bg-[var(--glass-hover)]">
+      <svg class="size-14 md:size-16 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -295,8 +477,8 @@
   <path d="M11 17h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
 </svg>
       <div>
-        <h3 class="text-2xl md:text-3xl font-extrabold">Кнопочные телефоны</h3>
-        <p class="mt-3 text-sky-100 max-w-[38ch]">Чиним кнопочные телефоны и меняем в них аккумуляторы. Старый телефон не спешите выбрасывать.</p>
+        <h3 class="text-2xl md:text-3xl font-semibold">Кнопочные телефоны</h3>
+        <p class="mt-3 text-muted max-w-[38ch]">Чиним кнопочные телефоны и меняем в них аккумуляторы. Старый телефон не спешите выбрасывать.</p>
         <span class="mt-5 inline-flex items-center gap-2 font-bold">Об аккумуляторах <svg class="size-5 transition-transform group-hover:translate-x-1 shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
@@ -316,8 +498,8 @@
 </svg></span>
       </div>
     </a>
-    <a href="/ne-zaryazhaetsya/" class="group rounded-box border border-line bg-panel p-7 flex gap-5 items-start hover:border-blue">
-      <svg class="size-10 text-blue shrink-0" aria-hidden="true" focusable="false"
+    <a href="/ne-zaryazhaetsya/" class="group rounded-box glass p-7 flex gap-5 items-start hover:bg-[var(--glass-hover)]">
+      <svg class="size-10 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -342,8 +524,8 @@
         <p class="mt-2 text-muted">Зарядка перестала работать? Не выбрасывайте, принесите. Посмотрим и починим.</p>
       </div>
     </a>
-    <a href="/zamena-akkumulyatora/" class="group rounded-box border border-line bg-panel p-7 flex gap-5 items-start hover:border-blue">
-      <svg class="size-10 text-blue shrink-0" aria-hidden="true" focusable="false"
+    <a href="/zamena-akkumulyatora/" class="group rounded-box glass p-7 flex gap-5 items-start hover:bg-[var(--glass-hover)]">
+      <svg class="size-10 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -368,210 +550,13 @@
   </div>
 </section>
 
-<section class="wrap py-12 md:py-16" aria-labelledby="repair-title">
-  <h2 id="repair-title" class="h2">Что чиним</h2>
-  <ul class="mt-10 grid gap-x-10 gap-y-2 md:grid-cols-2">
-    <li><a href="/zamena-ekrana/" class="service-row group"><svg class="size-8 text-sun shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M7.159 3.185c.256 -.119 .54 -.185 .841 -.185h8a2 2 0 0 1 2 2v9m0 4v1a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-13" />
-  <path d="M11 4h2" />
-  <path d="M3 3l18 18" />
-  <path d="M12 17v.01" />
-</svg><span><b>Замена экрана и стекла</b><span class="block text-muted">Разбили, полосы, не реагирует на касания</span></span><svg class="size-6 ml-auto text-muted group-hover:text-text shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M5 12l14 0" />
-  <path d="M13 18l6 -6" />
-  <path d="M13 6l6 6" />
-</svg></a></li>
-    <li><a href="/zamena-akkumulyatora/" class="service-row group"><svg class="size-8 text-sun shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M6 7h11a2 2 0 0 1 2 2v.5a.5 .5 0 0 0 .5 .5a.5 .5 0 0 1 .5 .5v3a.5 .5 0 0 1 -.5 .5a.5 .5 0 0 0 -.5 .5v.5a2 2 0 0 1 -2 2h-11a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2" />
-  <path d="M7 10l0 4" />
-  <path d="M10 10l0 4" />
-</svg><span><b>Замена аккумулятора</b><span class="block text-muted">Быстро садится, выключается, вздулся</span></span><svg class="size-6 ml-auto text-muted group-hover:text-text shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M5 12l14 0" />
-  <path d="M13 18l6 -6" />
-  <path d="M13 6l6 6" />
-</svg></a></li>
-    <li><a href="/ne-zaryazhaetsya/" class="service-row group"><svg class="size-8 text-sun shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M9.785 6l8.215 8.215l-2.054 2.054a5.81 5.81 0 1 1 -8.215 -8.215l2.054 -2.054" />
-  <path d="M4 20l3.5 -3.5" />
-  <path d="M15 4l-3.5 3.5" />
-  <path d="M20 9l-3.5 3.5" />
-</svg><span><b>Не заряжается</b><span class="block text-muted">Разъём, кабель, блок питания</span></span><svg class="size-6 ml-auto text-muted group-hover:text-text shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M5 12l14 0" />
-  <path d="M13 18l6 -6" />
-  <path d="M13 6l6 6" />
-</svg></a></li>
-    <li><a href="/zabyli-parol/" class="service-row group"><svg class="size-8 text-sun shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2l0 -6" />
-  <path d="M11 16a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-  <path d="M8 11v-5a4 4 0 0 1 8 0" />
-</svg><span><b>Забыли пароль</b><span class="block text-muted">Восстановим доступ владельцу</span></span><svg class="size-6 ml-auto text-muted group-hover:text-text shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M5 12l14 0" />
-  <path d="M13 18l6 -6" />
-  <path d="M13 6l6 6" />
-</svg></a></li>
-    <li><a href="tel:+79616004440" class="service-row group"><svg class="size-8 text-sun shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M3 19l18 0" />
-  <path d="M5 7a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" />
-</svg><span><b>Ноутбуки и планшеты</b><span class="block text-muted">Позвоните, расскажите, что случилось</span></span><svg class="size-6 ml-auto text-muted group-hover:text-text shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-</svg></a></li>
-    <li><a href="tel:+79616004440" class="service-row group"><svg class="size-8 text-sun shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5" />
-</svg><span><b>Другая техника</b><span class="block text-muted">Спросите по телефону, возьмёмся ли</span></span><svg class="size-6 ml-auto text-muted group-hover:text-text shrink-0" aria-hidden="true" focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
- 
- 
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
- 
->
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-</svg></a></li>
-  </ul>
-</section>
 
-<section class="bg-blue-deep" aria-labelledby="price-title">
-  <div class="wrap py-14 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-    <div>
+
+<section class="wrap py-6 md:py-10" aria-labelledby="price-title">
+  <div class="glass rounded-[28px] px-6 py-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+    <div class="max-md:text-center">
       <h2 id="price-title" class="h2">Сколько стоит ремонт?</h2>
-      <p class="mt-3 text-lg text-sky-100 max-w-[46ch]">Точную цену скажем по фото в WhatsApp. Пришлите снимок поломки и модель телефона.</p>
+      <p class="mt-3 text-lg text-muted max-w-[46ch] max-md:mx-auto">Точную цену скажем по фото в WhatsApp. Пришлите снимок поломки и модель телефона.</p>
     </div>
     <a href="https://wa.me/79616004440" class="btn btn-wa md:shrink-0" target="_blank" rel="noopener"><svg class="size-6 shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
@@ -593,7 +578,7 @@
 </section>
 
 <section class="wrap py-12 md:py-16 grid gap-8 md:grid-cols-[1fr_1.3fr] md:items-center" aria-labelledby="pass-title">
-  <div class="md:order-2">
+  <div class="md:order-2 max-md:text-center">
     <h2 id="pass-title" class="h2">Забыли пароль или графический ключ?</h2>
     <p class="mt-4 text-lg">Восстановим доступ к вашему телефону и постараемся сохранить фото, контакты и переписку.</p>
     <p class="mt-3 text-muted">Только владельцу: возьмите паспорт и коробку от телефона или чек. Если сохранить данные нельзя, скажем до начала работы.</p>
@@ -615,10 +600,10 @@
   <path d="M13 6l6 6" />
 </svg></a>
   </div>
-  <div class="rounded-box border border-line bg-panel p-6 md:p-8 md:order-1">
+  <div class="rounded-box glass p-6 md:p-8 md:order-1">
     <p class="font-bold text-lg">Что взять с собой</p>
     <ul class="mt-5 grid gap-5">
-      <li class="flex gap-4 items-center"><svg class="size-9 text-sun shrink-0" aria-hidden="true" focusable="false"
+      <li class="flex gap-4 items-center"><svg class="size-9 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -637,7 +622,7 @@
   <path d="M15 12l2 0" />
   <path d="M7 16l10 0" />
 </svg><span>Паспорт</span></li>
-      <li class="flex gap-4 items-center"><svg class="size-9 text-sun shrink-0" aria-hidden="true" focusable="false"
+      <li class="flex gap-4 items-center"><svg class="size-9 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -652,7 +637,7 @@
   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
   <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2m4 -14h6m-6 4h6m-2 4h2" />
 </svg><span>Коробку от телефона или чек</span></li>
-      <li class="flex gap-4 items-center"><svg class="size-9 text-sun shrink-0" aria-hidden="true" focusable="false"
+      <li class="flex gap-4 items-center"><svg class="size-9 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -673,20 +658,10 @@
   </div>
 </section>
 
-<section class="wrap py-12 md:py-16" aria-labelledby="years-title">
-  <div class="grid gap-6 md:grid-cols-[auto_1fr] md:items-end md:gap-12 border-t border-line pt-12">
-    <p class="font-extrabold leading-none text-sun text-[7rem] md:text-[10rem] tabular-nums" aria-hidden="true">20+</p>
-    <div class="pb-2">
-      <h2 id="years-title" class="h2">Больше 20 лет на одном месте</h2>
-      <p class="mt-3 text-lg text-muted max-w-[48ch]">Мастерская работает в цоколе «Меркурия» с начала 2000-х. Та же точка и тот же вход.</p>
-    </div>
-  </div>
-</section>
-
 <section id="kak-nayti" class="wrap py-12 md:py-16" aria-labelledby="find-title">
   <h2 id="find-title" class="h2">Как нас найти</h2>
   <div class="mt-10 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
-    <figure class="rounded-box border border-line bg-panel p-3 md:p-4">
+    <figure class="rounded-box glass p-3 md:p-4">
       <!-- Схема по образцу, одобренному братом 01.05.2026 (сообщение 237315): координаты взяты с той картинки -->
       <svg viewBox="360 95 830 830" class="w-full h-auto rounded-[10px]" role="img" aria-labelledby="map-t map-d">
         <title id="map-t">Схема: как пройти в «Мастер Нова»</title>
@@ -755,8 +730,8 @@
         <li class="flex gap-4"><span class="step-num">2</span><span>Заходите через <b>крайний вход со стороны ул. Советской</b>. Через центральный не идите.</span></li>
         <li class="flex gap-4"><span class="step-num">3</span><span>Сразу спускайтесь вниз, на цокольный этаж. Есть пандус.</span></li>
       </ol>
-      <div class="mt-8 rounded-box bg-panel border border-line p-5 max-w-80">
-        <p class="font-bold mb-2 flex items-center gap-2"><svg class="size-5 text-sun shrink-0" aria-hidden="true" focusable="false"
+      <div class="mt-8 rounded-box glass p-5 max-w-80">
+        <p class="font-bold mb-2 flex items-center gap-2"><svg class="size-5 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -816,9 +791,9 @@
       </div>
     </div>
   </div>
-  <div class="mt-10 rounded-box border border-line bg-panel overflow-hidden">
-    <button type="button" class="w-full grid place-items-center gap-1 px-5 py-8 text-center hover:bg-line/40" data-live-map="https://yandex.ru/map-widget/v1/?oid=114632558328&amp;ol=biz&amp;z=17">
-      <span class="inline-flex items-center gap-2 text-lg font-bold"><svg class="size-6 text-sun shrink-0" aria-hidden="true" focusable="false"
+  <div class="mt-10 rounded-box glass overflow-hidden">
+    <button type="button" class="w-full grid place-items-center gap-1 px-5 py-8 text-center hover:bg-[var(--glass-hover)]" data-live-map="https://yandex.ru/map-widget/v1/?oid=114632558328&amp;ol=biz&amp;z=17">
+      <span class="inline-flex items-center gap-2 text-lg font-bold"><svg class="size-6 text-accent-text shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -855,7 +830,7 @@
 
 <section class="wrap py-12 md:py-16" aria-labelledby="faq-title">
   <h2 id="faq-title" class="h2">Вопросы и ответы</h2>
-  <div class="mt-8 max-w-3xl divide-y divide-line border-y border-line"><details class="faq group">
+  <div class="mt-8 max-w-3xl divide-y divide-edge border-y border-edge"><details class="faq group">
   <summary><span>Почему 88 минут, а не полтора часа?</span><svg class="size-6 text-muted transition-transform group-open:rotate-180 shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
@@ -944,30 +919,32 @@
 </section>
 </main>
 
-<footer class="border-t border-line mt-6 pb-28 md:pb-10">
-  <div class="wrap grid gap-10 py-12 md:grid-cols-3">
+<footer class="border-t border-edge mt-6 pb-28 md:pb-10">
+  <div class="wrap grid gap-10 py-12 md:grid-cols-3 max-md:text-center">
     <div>
-      <p class="text-xl font-extrabold">Мастер Нова</p>
-      <p class="mt-2 text-muted">Ремонт телефонов, планшетов, ноутбуков и зарядок в Липецке.</p>
+      <p class="logo">Мастер Нова</p>
+      <p class="mt-3 text-muted">Ремонт телефонов, планшетов, ноутбуков и зарядок в Липецке.</p>
     </div>
     <div>
-      <p class="font-bold">Адрес</p>
+      <p class="font-semibold">Адрес</p>
       <address class="not-italic mt-2 text-muted">398001, Липецк, площадь Победы, 1<br>ТЦ «Меркурий», цокольный этаж<br>Вход крайний, со стороны ул. Советской</address>
-      <p class="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+      <p class="mt-3 flex flex-wrap gap-x-5 gap-y-2 max-md:justify-center">
         <a href="https://yandex.ru/maps/org/master_nova/114632558328/" class="link-arrow" target="_blank" rel="noopener">Яндекс Карты</a>
         <a href="https://2gis.ru/lipetsk/firm/7881827628881690" class="link-arrow" target="_blank" rel="noopener">2ГИС</a>
       </p>
     </div>
     <div>
-      <p class="font-bold">Часы работы</p>
-      <dl class="mt-2 text-muted max-w-64 grid gap-1"><div class="flex justify-between gap-4"><dt>Пн-Пт</dt><dd class="tabular-nums">с 9:00 до 18:00</dd></div><div class="flex justify-between gap-4"><dt>Сб, Вс</dt><dd class="tabular-nums">с 10:00 до 14:00</dd></div></dl>
-      <p class="mt-4"><a href="tel:+79616004440" class="text-2xl font-extrabold tabular-nums hover:text-sun">8 961 600-44-40</a></p>
+      <p class="font-semibold">Часы работы</p>
+      <dl class="mt-2 text-muted max-w-64 grid gap-1 max-md:mx-auto"><div class="flex justify-between gap-4"><dt>Пн-Пт</dt><dd class="tabular-nums">с 9:00 до 18:00</dd></div><div class="flex justify-between gap-4"><dt>Сб, Вс</dt><dd class="tabular-nums">с 10:00 до 14:00</dd></div></dl>
+      <p class="mt-4"><a href="tel:+79616004440" class="font-mono text-2xl font-bold tabular-nums text-accent-text hover:text-text">8 961 600-44-40</a></p>
     </div>
   </div>
+  <p class="wrap text-sm text-muted max-md:text-center">Сайт использует cookies Яндекс Метрики для анализа посещаемости.</p>
 </footer>
 
-<div class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-ink/95 p-2 backdrop-blur md:hidden" role="region" aria-label="Связаться">
-  <a href="tel:+79616004440" class="btn btn-call"><svg class="size-6 shrink-0" aria-hidden="true" focusable="false"
+<div class="fixed inset-x-0 bottom-0 z-40 p-2 md:hidden" role="region" aria-label="Связаться">
+  <div class="glass-blur rounded-[20px] grid grid-cols-2 gap-2 p-2">
+    <a href="tel:+79616004440" class="btn btn-call !min-h-12 !shadow-none"><svg class="size-5 shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -982,7 +959,7 @@
   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
   <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
 </svg><span>Позвонить</span></a>
-  <a href="https://wa.me/79616004440" class="btn btn-wa" target="_blank" rel="noopener"><svg class="size-6 shrink-0" aria-hidden="true" focusable="false"
+    <a href="https://wa.me/79616004440" class="btn btn-wa !min-h-12" target="_blank" rel="noopener"><svg class="size-5 shrink-0" aria-hidden="true" focusable="false"
   xmlns="http://www.w3.org/2000/svg"
  
  
@@ -998,9 +975,20 @@
   <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
   <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
 </svg><span>WhatsApp</span></a>
+  </div>
 </div>
 
 <script>
+// Переключатель темы: выбор запоминаем, дальше он важнее настройки устройства
+(function () {
+  var b = document.querySelector('[data-theme-toggle]'); if (!b || !window.applyTheme) return;
+  applyTheme(document.documentElement.getAttribute('data-theme'));
+  b.addEventListener('click', function () {
+    var t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(t);
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+})();
 // Цели Метрики: один обработчик на все ссылки, распознаём по href
 (function () {
   function goal(id) { if (typeof ym === 'function') ym(window.YM_ID, 'reachGoal', id); }
@@ -1013,6 +1001,15 @@
   });
 })();
 </script>
-
+<script>
+window.YM_ID=113524409;
+window.addEventListener('load',function(){setTimeout(function(){
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113524409','ym');
+ym(113524409,'init',{ssr:true,clickmap:true,trackLinks:true,accurateTrackBounce:true,referrer:document.referrer,url:location.href});
+},1500)});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113524409" style="position:absolute;left:-9999px" alt=""></div></noscript>
 </body>
 </html>
